@@ -95,3 +95,28 @@ function deplaceReverse(event) {
  	rowEl.insertBefore(rowEl.firstElementChild, rowEl.lastElementChild.nextSibling);
  } 
  buttonLeft.addEventListener("click",deplaceReverse);
+
+ // Fonctionnalité 9 : Columnes avec keypress
+/* 	•	La fonctionnalité se déclenchera si le logo de la page (JS & Events) 
+	est sélectionné et qu'on appuie sur une touche spécifique du clavier.
+	•	Si l'utilisateur presse la touche "a", l'ensemble de la page 
+	va être condensé sur 4 colonnes Bootstrap à gauche de l'écran.
+	•	Si l'utilisateur presse la touche "y", l'ensemble de la page 
+	va être condensé sur 4 colonnes Bootstrap au milieu de l'écran.
+	•	Si l'utilisateur presse la touche "p", l'ensemble de la page 
+	va être condensé sur 4 colonnes Bootstrap à droite de l'écran.
+	•	Si l'utilisateur presse la touche "b", tout redevient normal. */
+let logoTextEl = document.getElementsByTagName('strong')[0];
+function columns() {
+	document.addEventListener("keypress",key);
+}
+function key(event) {
+	let body = document.body;
+	body.className = "";
+	if (event.key === 'a') {body.classList.add("col-4");} 
+	else if (event.key === 'y') {body.classList.add("offset-md-4","col-4");}
+	else if (event.key === 'p') {body.classList.add("offset-md-8","col-4");}
+	else if (event.key === 'b'){}
+}
+
+logoTextEl.addEventListener("click", columns);
