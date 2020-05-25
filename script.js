@@ -62,7 +62,36 @@ s'il repasse sa souris, la card redevient normale !*/
 let cardsEL = document.getElementsByClassName('card');
 for (let card of cardsEL) {
 	card.addEventListener("mouseover",function () {
-	card.childNodes[1].style.w = "none";
+	if (card.childNodes[3].childNodes[1].style.display !== "none") {
+		card.childNodes[1].style = "width: 20%;"; //Image
+		card.childNodes[3].childNodes[1].style.display = "none"; //Texte
+	} 
+	else {
+		card.childNodes[1].style = "width: 100%;"; //Image
+		card.childNodes[3].childNodes[1].style.display = "";
+	}
 	})
 }
-console.log(cardsEL)
+
+//Fonctionnalité 7 : Déplacer les cartes
+/*si un utilisateur clique sur le bouton gris ==>, 
+la dernière card (en bas à droite) va passer en premier 
+(en haut à gauche). On va pouvoir faire tourner les cards !*/
+let rowEl = document.getElementsByClassName('row')[1];
+let buttonRigth = document.getElementsByClassName('btn btn-secondary my-2')[0];
+function deplace(event) {
+	event.preventDefault();
+	rowEl.insertBefore(rowEl.lastElementChild, rowEl.firstElementChild);
+}
+buttonRigth.addEventListener("click",deplace);
+
+// Fonctionnalité 8 : Déplacer dans l'autre sens
+/*on va faire tourner les card dans l'autre sens aussi. 
+Donc si un utilisateur clique sur le bouton bleu <==, la 
+première card devra passer en dernier.*/
+let buttonLeft = document.getElementsByClassName('btn btn-primary my-2')[0];
+function deplaceReverse(event) {
+ 	event.preventDefault();
+ 	rowEl.insertBefore(rowEl.firstElementChild, rowEl.lastElementChild.nextSibling);
+ } 
+ buttonLeft.addEventListener("click",deplaceReverse);
